@@ -1,3 +1,8 @@
+# Welcome to the Wrapped Moon Cat Explorer!
+This was built super fast on a Saturday so feel free to submit issues.
+
+# React nonsense yada yada below. . .
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
