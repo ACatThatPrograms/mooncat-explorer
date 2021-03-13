@@ -12,20 +12,14 @@ function MainPage() {
 
     const updateMooncatId = (e) => {
         let value = e.target.value;
-        // Allow CAT Ids
-        if (value[1] === 'x' && value.length === 12) {
-            setMooncatId(value)
-        } else {
-
-            if (isNaN(parseInt(value))) {
-                console.log('hit')
-                value = ""
-            }
-            else {
-                value = parseInt(value);
-            }
-            setMooncatId(value);
+        if (isNaN(parseInt(value))) {
+            console.log('hit')
+            value = ""
         }
+        else {
+            value = parseInt(value);
+        }
+        setMooncatId(value);
     };
 
     const toggleShowAll = (e) => setShowAllChecked(!showAllChecked);
@@ -99,7 +93,7 @@ function MainPage() {
 
             </Grid.Column>
 
-            <Grid.Column width={16}>
+            <Grid.Column width={16} className="pt-1">
 
                 {!mooncatDetails && mooncatId ? (
                     <Segment color="red">
@@ -115,12 +109,18 @@ function MainPage() {
                         <Grid padded>
 
                             <Grid.Column computer={4} tablet={16} textAlign="center">
-                                <Header as="h2">
-                                    {mooncatDetails.name ? mooncatDetails.name : ""}
-                                    <Header.Subheader>
-                                        {mooncatDetails.catId} | {mooncatDetails.wrapperId}
-                                    </Header.Subheader>
-                                </Header>
+                                {mooncatDetails.name ? (
+                                    <Header as="h2">
+                                        {mooncatDetails.name ? mooncatDetails.name : ""}
+                                        <Header.Subheader>
+                                            {mooncatDetails.catId} | {mooncatDetails.wrapperId}
+                                        </Header.Subheader>
+                                    </Header>
+                                ) : (
+                                        <Header sub>
+                                            {mooncatDetails.catId} | {mooncatDetails.wrapperId}
+                                        </Header>
+                                    )}
                                 <Image className="catImg" centered src={"https://api.polyself.xyz/mooncats/image/" + mooncatDetails.wrapperId} />
                             </Grid.Column>
 

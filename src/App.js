@@ -5,6 +5,8 @@ import MainPage from './pages/MainPage';
 import ethHandler from './eth/EthHandler';
 import NotConnected from './pages/NotConnected';
 
+import Footer from './components/Footer';
+
 function App() {
 
   const [isConnected, setIsConnected] = React.useState(ethHandler.isConnected());
@@ -15,7 +17,7 @@ function App() {
 
       <Segment>
 
-        <Header as="h1">
+        <Header as="h3" className="P2F">
           Wrapped Moon Cat Explorer
           <Header.Subheader>
             Investigate Those Wrapped Mooncats
@@ -25,6 +27,8 @@ function App() {
       </Segment>
 
       {isConnected ? <MainPage /> : <NotConnected setIsConnected={setIsConnected} />}
+
+      <Footer/>
 
     </Container>
 

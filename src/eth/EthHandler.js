@@ -132,8 +132,10 @@ class EthHandler {
       let wrapperOwner = isWrapperId ? await wrapperContract.methods.ownerOf(mooncatId).call() : "n/a";
       let details = await mooncatContract.methods.getCatDetails(catId).call()
 
+      let catName = details.name === "0x0000000000000000000000000000000000000000000000000000000000000000" ? false : this.web3.utils.hexToAscii(details.name);
+
       return {
-        name: this.web3.utils.hexToAscii(details.name),
+        name: catName,
         wrapperId: mooncatId,
         catId: catId,
         wrapperOwner: wrapperOwner,

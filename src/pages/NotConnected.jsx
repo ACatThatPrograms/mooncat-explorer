@@ -21,13 +21,24 @@ function NotConnected({setIsConnected}) {
     return (<>
 
         <Segment color="orange">
-            <Header>
+            <Header as="h4">
                 Hold up!
                 <Header.Subheader>
                     You need to connect with a Web3 wallet to check out these Mooncats!
                 </Header.Subheader>
             </Header>
             <Button color="green" content="Connect Web3" onClick={connect} loading={loading} />
+        </Segment>
+
+        <Segment color="red">
+            <Header as="h4">
+                Whoa, why do you want to connect to my wallet?
+            </Header>
+
+            <p>Right now? Not much reason, and you're encouraged to checkout the code on github for comfort!</p>
+            
+            <p>I plan on adding a feature to scan your wallet for cats, but I am lazy and Saturday's aren't very long so it isn't implemented yet.</p>
+
         </Segment>
 
         {web3Err ? (
