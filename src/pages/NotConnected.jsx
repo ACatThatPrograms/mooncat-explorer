@@ -37,7 +37,7 @@ function NotConnected({setIsConnected}) {
 
             <p>Right now? Not much reason, and you're encouraged to checkout the code on github for comfort!</p>
             
-            <p>I plan on adding a feature to scan your wallet for cats, but I am lazy and Saturday's aren't very long so it isn't implemented yet.</p>
+            <p>I plan on adding a feature to scan your wallet for cats, but I am lazy and Saturdays aren't very long so hasn't been implemented yet.</p>
 
         </Segment>
 
