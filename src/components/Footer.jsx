@@ -19,8 +19,8 @@ function Footer() {
 
                 <Header as="h4" className="nm-t" >I love mooncats and want to donate!</Header>
                 <p className="P2F sz10">Me too! Thank you in advance! Mooncat Love to all!</p>
-                <div className="click-icon">
-                    <b>{donateAddress} <Icon name="copy" onClick={() => copyToClipboard(donateAddress)} /> </b>
+                <div className="click-icon" onClick={() => copyToClipboard(donateAddress)}>
+                    <b>{donateAddress} <Icon name="copy" /> </b>
                 </div>
 
                 <Header sub>
