@@ -1,0 +1,29 @@
+.main-wrap {
+    padding-top: 1rem;
+}
+
+body {
+    background-image: url('./img/spaceBg.png') !important;
+    background-size: cover;
+}
+
+.non-btn {
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.catImgCol {
+    display: flex;
+    background-color: white;
+}
+
+.catImg {
+    max-height: 182px !important;
+    margin-top: 2rem;
+    width: auto;
+}
+
+.showAllForm {
+    position: absolute !important;
+    bottom: 0rem;
+}
