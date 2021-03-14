@@ -1,7 +1,10 @@
 import React from 'react';
+import {  BrowserRouter as Router, Route } from 'react-router-dom';
 import { Header, Container, Segment } from 'semantic-ui-react';
 
+import MoonMenu from './components/MoonMenu.jsx';
 import MainPage from './pages/MainPage';
+import WrapperPage from './pages/Wrapper';
 import ethHandler from './eth/EthHandler';
 import NotConnected from './pages/NotConnected';
 
@@ -26,7 +29,18 @@ function App() {
 
       </Segment>
 
-      {isConnected ? <MainPage /> : <NotConnected setIsConnected={setIsConnected} />}
+      {isConnected ? (
+
+        <Router>
+
+          <MoonMenu/>
+
+          <Route exact path="/" component={MainPage}/>
+          <Route exact path="/wrapping" component={WrapperPage}/>
+
+        </Router>
+
+      ) : <NotConnected setIsConnected={setIsConnected} />}
 
       <Footer/>
 
