@@ -2,6 +2,7 @@ import React from 'react'
 import MoonCatData from '../components/MoonCatData';
 import { Form, Segment, Button, Grid, Image, Header } from 'semantic-ui-react';
 import ethHandler from '../eth/EthHandler';
+import axios from 'axios'
 
 function MainPage() {
 
@@ -9,6 +10,8 @@ function MainPage() {
     const [mooncatDetails, setMoonCatDetails] = React.useState("");
     const [loading, setLoading] = React.useState(false);
     const [showAllChecked, setShowAllChecked] = React.useState(false);
+
+    const [totalWrappedCats, setTotalWrappedCats] = React.useState(false); // Hard set base number
 
     const updateMooncatId = (e) => {
         let value = e.target.value;
@@ -34,6 +37,10 @@ function MainPage() {
             setMooncatId(s => String(parseInt(s) - 1))
         }
     }
+    const randoCat = () => {
+        // Hard coded for now til I setup an opensea call
+        setMooncatId(Math.floor(Math.random() * Math.floor(totalWrappedCats)))
+    }
 
     React.useEffect(() => {
 
@@ -45,9 +52,25 @@ function MainPage() {
             setLoading(false);
         }
 
+        const updateCatCount = async () => {
+            try {
+                let latest = await axios.get('https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&asset_contract_address=0x7c40c393dc0f283f318791d746d894ddd3693572&limit=1');
+                // Estimate amount based on latest token minted's token_id
+                let amount = latest.data && latest.data.assets && latest.data.assets[0].token_id;
+                setTotalWrappedCats(amount);
+            } catch (ex){
+                console.warn("Error fetching total cats from OS api");
+            }
+            
+        }
+
+        if (totalWrappedCats === false) {
+            updateCatCount();
+        }
+
         getCatDetails();
 
-    }, [mooncatId])
+    }, [mooncatId, totalWrappedCats])
 
     return (
 
@@ -87,6 +110,14 @@ function MainPage() {
                             />
 
                         </>)}
+
+                        <Button
+                            content="Rando Mooncat!"
+                            onClick={randoCat}
+                            secondary
+                            inverted
+                        />
+
 
                     </Form>
                 </Segment>

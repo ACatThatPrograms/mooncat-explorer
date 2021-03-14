@@ -106,12 +106,6 @@ class EthHandler {
 
   async getCatDetails(mooncatId) {
 
-    // Is wrapperId?
-    let isWrapperId = true;
-    if (mooncatId[1] === 'x' && mooncatId.length === 12) {
-      isWrapperId = false;
-    }
-
     // Get Addresses
     if (!this._haveAccounts()) {
       await this._loadAccounts();
@@ -121,20 +115,16 @@ class EthHandler {
     let wrapperContract = this._getContract(CONTRACT_NAMES.MOONWRAP);
 
     try {
-      let catId;
-      if (!isWrapperId) {
-        catId = mooncatId;
-      } else {
-        catId = await wrapperContract.methods._tokenIDToCatID(mooncatId).call();
-      }
+      let catId = await wrapperContract.methods._tokenIDToCatID(mooncatId).call();
 
       // Wrapper owener?
-      let wrapperOwner = isWrapperId ? await wrapperContract.methods.ownerOf(mooncatId).call() : "n/a";
+      let wrapperOwner = await wrapperContract.methods.ownerOf(mooncatId).call();
       let details = await mooncatContract.methods.getCatDetails(catId).call()
 
       let catName = details.name === "0x0000000000000000000000000000000000000000000000000000000000000000" ? false : this.web3.utils.hexToAscii(details.name);
 
       return {
+        osLink:<a href={"https://opensea.io/assets/0x7c40c393dc0f283f318791d746d894ddd3693572/"+mooncatId} rel="noreferrer" target="_blank">View On OpenSea</a>,
         name: catName,
         wrapperId: mooncatId,
         catId: catId,
